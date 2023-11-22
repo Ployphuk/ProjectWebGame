@@ -1,0 +1,106 @@
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    grid-gap: 10px;
+}
+
+.grid-container>div {
+
+    font-size: 36px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#header {
+    grid-column: 1 / span 3;
+}
+
+#main1 {
+    grid-column: 1 / span 1;
+    background-color: chartreuse;
+}
+
+#main2 {
+    grid-column: 2 / span 1;
+    background-color: bisque;
+}
+
+#main2>div {
+    display: inline-block;
+}
+
+#main3 {
+    grid-column: 3 / span 1;
+    background-color: aquamarine;
+}
+
+
+#footer {
+    grid-column: 1 / span 1;
+    background-color: aqua;
+}
+
+#footer2 {
+    grid-column: 2 / span 1;
+    background-color: rgb(89, 0, 255);
+}
+
+#footer3 {
+    grid-column: 3 / span 1;
+    background-color: rgb(255, 0, 212);
+}
+
+.flex_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+}
+
+.flex_container>div {
+    border: 2px solid rgb(228, 255, 252);
+    border-radius: 20px;
+    width: 1000px;
+    height: 400px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(236, 246, 255);
+}
+
+.box {
+    width: 250px;
+    height: 24px;
+    
+}
+.box2 {
+    width: 250px;
+    height: 24px;
+    margin-right: 264px;
+}
+
+.Lside {
+    text-align: left;
+
+}
+
+.Rside {
+    text-align: right;
+    margin-right: 50px;
+}
+
+.Lside2 {
+    text-align: right;
+    margin-right: 440px;
+}
+
+#contact {
+    font-size: 20px;
+}
+
+#copyright {
+    font-size: 20px;
+}
+
