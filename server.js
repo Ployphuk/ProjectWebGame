@@ -65,7 +65,7 @@ app.post("/login", async (req, res) => {
 
     if (result.length > 0) {
         // Login successful
-        res.cookie("username", username);
+        
         return res.redirect("gamepage.html");
     } else {
         // Login failed
