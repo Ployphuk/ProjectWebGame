@@ -6,59 +6,37 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<title>Page Title</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
-	<link rel='stylesheet' type='text/css' media='screen' href='register.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+	<script type="text/javascript" src="/public/js/loginctl.js"></script>
 	
 </head>
 
 <body>
 	<div>
-		<form name="myForm" id="registerForm" action="/register" method="post">
+		<form name="loginForm" id="loginForm" action="/login" method="post">
 			<div class="grid-container">
 				<div id="header">
 					<h2>Untitled</h2>
-					<a id = "home" href = "./GamePage.html">Home</a>
+                    <a id = "home" href = "./GamePage.html">Home</a>
                     <a id = "leaderboard" href = "./LeaderBoard1.html">LeaderBoard</a>
 				</div>
-				<div id="main1"> AAA </div>
-				<div id="main2">
+				<div id="main">
 					
-						<div>Register</div>
+						<div>Login</div>
 						<br>
 						<div>
-							<p class="Lside">Name</p>
-							<input class="box" type="text" id="firstname" name="firstname" required>
-						</div>
-						<div>
-							<p>Surename</p>
-							<input class="box" type="text" id="username" name="username">
+							<p class="userText">Username</p>
+							<input class="userBox" type="text" id="username" name="username" required>
 						</div>
 						<br>
 						<div>
-							<p class="Lside2">Email </p>
-							<input class="box2" type="text" id="email" name="email" required>
+							<p class="passText">Password </p>
+							<input class="passBox" type="password" id="password" name="password" required>
 						</div>
 						<br>
-						<div>
-							<p class="Lside">Password</p>
-							<input class="box" type="password" id="password" name="password" required>
-						</div>
-						<div>
-							<p>Confirm Password</p>
-							<input class="box" type="password" id="confirmpassword" name="confirmpassword" required>
-						</div>
-						<br>
-						<div><input type="submit"  value="Submit"></div>
+						<div><input type="submit" value="Login"></div>
+                        <a id = "register" href = "./Register.html">Register now!</a>
 					
-				</div>
-				<div id="main3"> AAA </div>
-
-				<div id="footer">
-					<p id="contact">Contact</p>
-					
-
-				</div>
-				<div id="footer3">
-					<p id="copyright">CopyRight2023</p>
 				</div>
 			</div>
 		</form>

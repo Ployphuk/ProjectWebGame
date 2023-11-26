@@ -45,8 +45,26 @@ app.post("/register", async (req,res) => {
     sql = `INSERT INTO userdata (username, firstname, email, password, confirmpassword) VALUES("${req.body.username}", "${req.body.firstname}","${req.body.email}","${req.body.password}","${req.body.confirmpassword}") `;
     result = await queryDB(sql);
     console.log("New Record successful");
-    return res.redirect("Login.html");
+    return res.redirect("index.html");
 })
+
+
+app.post("/login", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // Check the database for the provided username and password
+    const sql = `SELECT * FROM ${tablename} WHERE username="${username}" AND password="${password}"`;
+    const result = await queryDB(sql);
+
+    if (result.length > 0) {
+        // Login successful
+        return res.redirect("gamepage.html");
+    } else {
+        // Login failed
+        res.status(401).send("Invalid username or password");
+    }
+});
 
 
 
