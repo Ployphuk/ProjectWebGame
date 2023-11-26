@@ -7,12 +7,12 @@
 	<title>Page Title</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link rel='stylesheet' type='text/css' media='screen' href='register.css'>
-	<script src='register.js'></script>
+	
 </head>
 
 <body>
 	<div>
-		<form name="myForm" id="myForm" action="Login.html">
+		<form name="myForm" id="registerForm" action="/register" method="post">
 			<div class="grid-container">
 				<div id="header">
 					<h2>Untitled</h2>
@@ -26,28 +26,28 @@
 						<br>
 						<div>
 							<p class="Lside">Name</p>
-							<input class="box" type="text" name="firstname" required>
+							<input class="box" type="text" id="firstname" name="firstname" required>
 						</div>
 						<div>
 							<p>Surename</p>
-							<input class="box" type="text" name="lastname">
+							<input class="box" type="text" id="username" name="username">
 						</div>
 						<br>
 						<div>
 							<p class="Lside2">Email </p>
-							<input class="box2" type="text" name="email" required>
+							<input class="box2" type="text" id="email" name="email" required>
 						</div>
 						<br>
 						<div>
 							<p class="Lside">Password</p>
-							<input class="box" type="password" name="password" required>
+							<input class="box" type="password" id="password" name="password" required>
 						</div>
 						<div>
 							<p>Confirm Password</p>
-							<input class="box" type="password" name="retype_password" required>
+							<input class="box" type="password" id="confirmpassword" name="confirmpassword" required>
 						</div>
 						<br>
-						<div><input type="submit" value="Submit"></div>
+						<div><input type="submit"  value="Submit"></div>
 					
 				</div>
 				<div id="main3"> AAA </div>
