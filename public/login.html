@@ -4,7 +4,7 @@
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-	<title>Page Title</title>
+	<title>Login</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link rel='stylesheet' type='text/css' media='screen' href='login.css'>
 	<script type="text/javascript" src="/public/js/loginctl.js"></script>
@@ -14,31 +14,25 @@
 <body>
 	<div>
 		<form name="loginForm" id="loginForm" action="/login" method="post">
+
 			<div class="grid-container">
 				<div id="header">
 					<h2>Untitled</h2>
-                    <a id = "home" href = "./GamePage.html">Home</a>
-                    <a id = "leaderboard" href = "./LeaderBoard1.html">LeaderBoard</a>
 				</div>
+
 				<div id="main">
-					
-						<div>Login</div>
-						<br>
-						<div>
-							<p class="userText">Username</p>
-							<input class="userBox" type="text" id="username" name="username" required>
-						</div>
-						<br>
-						<div>
-							<p class="passText">Password </p>
-							<input class="passBox" type="password" id="password" name="password" required>
-						</div>
-						<br>
-						<div><input type="submit" value="Login"></div>
-                        <a id = "register" href = "./Register.html">Register now!</a>
-					
+					<div>Login</div>
+					<div class="input-box">
+						<input type="text" id="username" name="username" placeholder="Username" required>
+					</div>
+					<div>
+						<input type="password" id="password" name="password" placeholder="Password" required>
+					</div>
+					<button type="submit" id="loginBtn">Login</button>
+                    <p>Don't have an account? <a id = "register" href = "./register.html">Register now!</a></p>
 				</div>
 			</div>
+
 		</form>
 	</div>
 </body>
