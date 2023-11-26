@@ -1,15 +1,21 @@
+const fs = require("fs");
 const express = require('express');
 const bodyParser = require('body-parser');
+var cookieParser = require("cookie-parser");
 const mysql = require('mysql');
 const hostname = 'localhost';
+const path = require("path");
 
 const app = express();
 const port = 3000;
 
+const { userdata } = require("os");
+const { constrainMemory } = require("process");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(express.static('public'));
+app.use(cookieParser());
 
 
 const db= mysql.createConnection({
@@ -59,6 +65,7 @@ app.post("/login", async (req, res) => {
 
     if (result.length > 0) {
         // Login successful
+        res.cookie("username", username);
         return res.redirect("gamepage.html");
     } else {
         // Login failed
@@ -66,6 +73,17 @@ app.post("/login", async (req, res) => {
     }
 });
 
+app.get("/gamepage", (req, res) => {
+    const username = req.cookies.username;
+
+    if (!username) {
+        // Redirect to login page if the username cookie is not set
+        return res.redirect("/login.html");
+    }
+
+    // Proceed with rendering the game page
+    res.sendFile(path.join(__dirname, "public", "gamepage.html"));
+});
 
 
 app.listen(port, () => {
