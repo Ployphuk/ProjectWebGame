@@ -146,6 +146,17 @@ app.get('/leaderboard', async (req, res) => {
     }
 });
 
+app.get('/fallleaderboard', async (req, res) => {
+    try {
+        const getLeaderboardQuery = 'SELECT username, fallgamescore FROM userdata ORDER BY fallgamescore DESC LIMIT 3';
+        const leaderboardData = await queryDB(getLeaderboardQuery);
+        res.json(leaderboardData);
+    } catch (error) {
+        console.error('Error fetching leaderboard data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
