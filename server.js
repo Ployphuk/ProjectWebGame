@@ -308,6 +308,24 @@ app.post('/like', authenticateUser, async (req, res) => {
 
 // Add this route to your server.js file
 // Change SELECT to UPDATE
+app.post('/updateLikeCount', authenticateUser, async (req, res) => {
+    try {
+        const { username, updatedLikeCount2 } = req.body;
+
+        if (isNaN(updatedLikeCount2)) {
+            throw new Error('Invalid like count provided.');
+        }
+
+        // Update the like count in the database
+        const updateLikeCountQuery = `UPDATE ${tablename} SET likeCount2 = ${updatedLikeCount2} WHERE username = '${username}'`;
+        await queryDB(updateLikeCountQuery);
+
+        res.json({ message: 'Like count updated successfully' });
+    } catch (error) {
+        console.error('Error updating like count:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 // Add this route to your server.js file
 app.post('/getLikeCount', authenticateUser, async (req, res) => {
@@ -329,9 +347,6 @@ app.post('/getLikeCount', authenticateUser, async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-
-
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

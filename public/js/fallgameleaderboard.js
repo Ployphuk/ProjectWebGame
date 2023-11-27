@@ -1,4 +1,5 @@
 
+
 function checkCookie() {
     console.log("Checking cookie...");
     var username = getCookie("username");
