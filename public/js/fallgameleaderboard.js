@@ -115,6 +115,8 @@ async function fetchfallLeaderboard() {
 
   
  // Add a function to post comments
+ //test
+// Add a function to post comments
 async function postComment() {
     try {
         // Get the comment text from the textarea
@@ -126,13 +128,16 @@ async function postComment() {
             return;
         }
 
-        // Send the comment to the server
+        // Fetch the username from the cookie
+        const username = getCookie("username");
+
+        // Send the comment and username to the server
         const response = await fetch('/submitComment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ commentText }),
+            body: JSON.stringify({ commentText, username }),
         });
 
         if (response.ok) {
@@ -148,7 +153,9 @@ async function postComment() {
     }
 }
 
-// Add a function to fetch and update comments
+
+// Add a function to fetch and update 
+//test
 async function fetchComments() {
     try {
         const response = await fetch('/getComments');
@@ -156,6 +163,8 @@ async function fetchComments() {
 
         const feedContainer = document.getElementById('feed-container');
         feedContainer.innerHTML = '';
+
+        commentsData.reverse(); // Reverse the array to display newest comments first
 
         commentsData.forEach(comment => {
             const commentElement = document.createElement('div');
@@ -167,6 +176,7 @@ async function fetchComments() {
         console.error('Error fetching and updating comments:', error);
     }
 }
+
 
 // Ensure the DOM is fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function () {

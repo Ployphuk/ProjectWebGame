@@ -166,8 +166,11 @@ app.get('/fallleaderboard', async (req, res) => {
 app.get('/getComments', async (req, res) => {
     try {
         // Retrieve comments from the database
+        // Retrieve comments from the database, ordered by timestamp in descending order
+        //test
         const getCommentsQuery = 'SELECT * FROM comment ORDER BY timestamp DESC LIMIT 10';
         const commentsData = await queryDB(getCommentsQuery);
+
 
         res.json(commentsData);
     } catch (error) {
@@ -176,18 +179,32 @@ app.get('/getComments', async (req, res) => {
     }
 });
 
+//test
 // Add this route to your server.js file
 app.post('/submitComment', authenticateUser, async (req, res) => {
     try {
         const { commentText } = req.body;
         const username = req.username;
 
-        // Insert the new comment into the comments table
-        const insertCommentQuery = `
-            INSERT INTO comment (username, commentText)
-            VALUES ('${username}', '${commentText}')
-        `;
-        await queryDB(insertCommentQuery);
+        // Check if the user already has a comment
+        const existingCommentQuery = `SELECT * FROM comment WHERE username = '${username}'`;
+        const existingComment = await queryDB(existingCommentQuery);
+
+        if (existingComment.length > 0) {
+            // Update the existing comment if needed
+            // For example, you might want to update the timestamp or modify the existing commentText
+            const updateCommentQuery = `
+                UPDATE comment SET commentText = '${commentText}' WHERE username = '${username}'
+            `;
+            await queryDB(updateCommentQuery);
+        } else {
+            // Insert the new comment into the comments table
+            const insertCommentQuery = `
+                INSERT INTO comment (username, commentText,timestamp)
+                VALUES ('${username}', '${commentText}', CURRENT_TIMESTAMP)
+            `;
+            await queryDB(insertCommentQuery);
+        }
 
         res.json({ message: 'Comment submitted successfully' });
     } catch (error) {
@@ -195,6 +212,7 @@ app.post('/submitComment', authenticateUser, async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 //likebutton
 // ... (existing code)
