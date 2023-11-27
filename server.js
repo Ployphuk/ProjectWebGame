@@ -77,6 +77,14 @@ app.post("/login", async (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    // Clear the username cookie or perform any other logout actions
+
+    res.clearCookie('username');
+    res.redirect('/index.html'); // Redirect to the login page after logout
+});
+
+
 const authenticateUser = (req, res, next) => {
     const username = req.cookies.username;
 

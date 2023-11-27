@@ -5,7 +5,7 @@ function checkCookie() {
   console.log("Username from cookie:", username);
   if (!username) {
       console.log("Redirecting to login.html");
-      window.location = "login.html";
+      window.location = "Index.html";
   } else {
     console.log("Username found:", username);
     // Update the DOM with the username

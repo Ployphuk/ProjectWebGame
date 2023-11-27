@@ -1,11 +1,11 @@
-// Update your JavaScript file (leaderboardSetting.js)
+
 function checkCookie() {
     console.log("Checking cookie...");
     var username = getCookie("username");
     console.log("Username from cookie:", username);
     if (!username) {
         console.log("Redirecting to login.html");
-        window.location = "login.html";
+        window.location = "Index.html";
     } else {
         console.log("Username found:", username);
         // Update the DOM with the username
@@ -114,8 +114,7 @@ async function fetchfallLeaderboard() {
 
 
   
- // Add a function to post comments
- //test
+
 // Add a function to post comments
 async function postComment() {
     try {
@@ -155,7 +154,7 @@ async function postComment() {
 
 
 // Add a function to fetch and update 
-//test
+
 async function fetchComments() {
     try {
         const response = await fetch('/getComments');
