@@ -57,11 +57,70 @@ async function fetchfallLeaderboard() {
     }
   }
   
-  // Ensure the DOM is fully loaded before executing the script
-  document.addEventListener('DOMContentLoaded', function () {
+ // Add a function to post comments
+async function postComment() {
+    try {
+        // Get the comment text from the textarea
+        const commentText = document.getElementById('textmsg').value;
+
+        // Make sure the comment is not empty
+        if (commentText.trim() === '') {
+            alert('Please enter a comment before posting.');
+            return;
+        }
+
+        // Send the comment to the server
+        const response = await fetch('/submitComment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ commentText }),
+        });
+
+        if (response.ok) {
+            // If the server successfully handles the comment, fetch and update the comments
+            fetchComments();
+            // Clear the textarea after posting
+            document.getElementById('textmsg').value = '';
+        } else {
+            console.error('Failed to submit comment to server.');
+        }
+    } catch (error) {
+        console.error('Error posting comment:', error);
+    }
+}
+
+// Add a function to fetch and update comments
+async function fetchComments() {
+    try {
+        const response = await fetch('/getComments');
+        const commentsData = await response.json();
+
+        const feedContainer = document.getElementById('feed-container');
+        feedContainer.innerHTML = '';
+
+        commentsData.forEach(comment => {
+            const commentElement = document.createElement('div');
+            commentElement.className = 'comment';
+            commentElement.innerHTML = `<p>${comment.username}: ${comment.commentText}</p>`;
+            feedContainer.appendChild(commentElement);
+        });
+    } catch (error) {
+        console.error('Error fetching and updating comments:', error);
+    }
+}
+
+// Ensure the DOM is fully loaded before executing the script
+document.addEventListener('DOMContentLoaded', function () {
     checkCookie();
-    fetchfallLeaderboard(); // Fetch leaderboard data when the page loads
-    // pageLoad(); // Commented out or removed if not needed
-  });
+    fetchfallLeaderboard();
+    fetchComments(); // Fetch and update comments when the page loads
+});
+
   
+
+
+
   
+

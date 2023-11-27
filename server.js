@@ -47,6 +47,8 @@ const queryDB = (sql) => {
     })
 }
 
+
+
 app.post("/register", async (req,res) => {
     let sql = "CREATE TABLE IF NOT EXISTS userdata(id INT AUTO_INCREMENT PRIMARY KEY,reg_date TIMESTAMP, username VARCHAR(50), firstname VARCHAR(50), email VARCHAR(50), password VARCHAR(50), confirmpassword VARCHAR(50))";
     let result = await queryDB(sql);
@@ -98,6 +100,8 @@ app.get("/gamepage", authenticateUser, (req, res) => {
 // ... (existing code)
 
 
+//save score data
+
 app.post('/submitScore', async (req, res) => {
     try {
         const { score, username } = req.body;
@@ -133,7 +137,7 @@ app.post('/fallgamescore', authenticateUser, async (req, res) => {
 
 
 
-
+//leaderboard
 // Add this route to your server.js file
 app.get('/leaderboard', async (req, res) => {
     try {
@@ -154,6 +158,21 @@ app.get('/fallleaderboard', async (req, res) => {
     } catch (error) {
         console.error('Error fetching leaderboard data:', error);
         res.status(500).send('Internal Server Error');
+    }
+});
+
+
+//commentpart
+app.get('/getComments', async (req, res) => {
+    try {
+        // Retrieve comments from the database
+        const getCommentsQuery = 'SELECT * FROM comments ORDER BY timestamp DESC LIMIT 10';
+        const commentsData = await queryDB(getCommentsQuery);
+
+        res.json(commentsData);
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
