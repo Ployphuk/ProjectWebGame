@@ -102,6 +102,9 @@ let onGhostCollision = () => {
     lives--;
     restartPacmanAndGhosts();
     if (lives == 0) {
+        window.location.href = "../leaderboard2.html?score=" + score;
+    }else{
+        restartPacmanAndGhosts();
     }
 };
 

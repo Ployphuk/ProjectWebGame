@@ -76,6 +76,7 @@ window.onload = function() {
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
+        window.location.href = "../leaderboard3.html?score=" + score;
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
