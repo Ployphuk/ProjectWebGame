@@ -112,6 +112,17 @@ app.post('/submitScore', async (req, res) => {
 });
 
 
+// Add this route to your server.js file
+app.get('/leaderboard', async (req, res) => {
+    try {
+        const getLeaderboardQuery = 'SELECT username, dinogamescore FROM userdata ORDER BY dinogamescore DESC LIMIT 3';
+        const leaderboardData = await queryDB(getLeaderboardQuery);
+        res.json(leaderboardData);
+    } catch (error) {
+        console.error('Error fetching leaderboard data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 app.listen(port, () => {
