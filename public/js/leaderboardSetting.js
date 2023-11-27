@@ -28,104 +28,109 @@ function getCookie(name) {
 let clickCount =0;
 
 // Function to fetch and update leaderboard data
+// Function to fetch and update leaderboard data
 async function fetchLeaderboard() {
-  try {
-      // Fetch fall leaderboard data from the server
-      const response = await fetch('/leaderboard');
-      const leaderboardData = await response.json();
+    try {
+        // Fetch fall leaderboard data from the server
+        const response = await fetch('/leaderboard');
+        const leaderboardData = await response.json();
 
-      // Clear existing leaderboard content
-      const leaderboardContainer = document.getElementById('leaderboard');
-      leaderboardContainer.innerHTML = '';
+        // Clear existing leaderboard content
+        const leaderboardContainer = document.getElementById('leaderboard');
+        leaderboardContainer.innerHTML = '';
 
-      // Iterate through the received data and update the leaderboard
-      for (const [index, entry] of Object.entries(leaderboardData)) {
-          const currentnum = parseInt(index) + 1;
+        // Iterate through the received data and update the leaderboard
+        for (const [index, entry] of Object.entries(leaderboardData)) {
+            const currentnum = parseInt(index) + 1;
 
-          // Create a new row element
-          const row = document.createElement('div');
-          row.classList.add('row');
+            // Create a new row element
+            const row = document.createElement('div');
+            row.classList.add('row');
 
-          // Create elements for leaderboard number, username, score, and like button
-          const leaderboardNumber = document.createElement('div');
-          leaderboardNumber.className = 'LeaderBoardNumber';
-          row.appendChild(leaderboardNumber);
+            // Create elements for leaderboard number, username, score, and like button
+            const leaderboardNumber = document.createElement('div');
+            leaderboardNumber.className = 'LeaderBoardNumber';
+            row.appendChild(leaderboardNumber);
 
-          const leaderboardText = document.createElement('h1');
-          leaderboardText.className = 'LeaderBoardNumber' + currentnum;
+            const leaderboardText = document.createElement('h1');
+            leaderboardText.className = 'LeaderBoardNumber' + currentnum;
 
-          // Get username and fallgamescore from the entry
-          const username = entry.username || 'N/A';
-          const dinogamescore = entry.dinogamescore || 'N/A';
+            // Get username and dinogamescore from the entry
+            const username = entry.username || 'N/A';
+            const dinogamescore = entry.dinogamescore || 'N/A';
 
-          // Set the text content for the leaderboard entry
-          leaderboardText.innerHTML = `${username}  Score: ${dinogamescore !== 'N/A' ? dinogamescore : '0'}`;
+            // Set the text content for the leaderboard entry
+            leaderboardText.innerHTML = `${username}  Score: ${dinogamescore !== 'N/A' ? dinogamescore : '0'}`;
 
+            // Create a like button
+            const likeButton = document.createElement('button');
+            likeButton.innerHTML = 'Like';
 
-          // Create a like button
-          const likeButton = document.createElement('button');
-          likeButton.innerHTML = 'Like';
+            // Create a span element for displaying the like count
+            const likeCountSpan = document.createElement('span');
+            likeCountSpan.innerHTML = '0'; // Initial like count
 
-          // Create a span element for displaying the like count
-          const likeCountSpan = document.createElement('span');
-          likeCountSpan.innerHTML = '0'; // Initial like count
-          likeButton.appendChild(likeCountSpan);
+            // Set data attribute for the username
+            likeButton.setAttribute('data-username', username);
 
-          // Fetch the current like count from the server
-          const likeCountResponse = await fetch('/updateLikeCount', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                  username: username,
-              }),
-          });
+            likeButton.appendChild(likeCountSpan);
 
-          if (likeCountResponse.ok) {
-              const likeCountData = await likeCountResponse.json();
-              clickCount = likeCountData.likeCount || 0;
-              likeCountSpan.innerHTML = clickCount;
-          } else {
-              console.error('Failed to fetch like count from the server.');
-          }
+            // Fetch the current like count from the server
+            const likeCountResponse = await fetch('/getLikeCount', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                }),
+            });
 
-          // Add a click event listener to the like button
-          likeButton.addEventListener('click', async () => {
-              // Increment the click count
-              clickCount++;
+            if (likeCountResponse.ok) {
+                const likeCountData = await likeCountResponse.json();
+                const clickCount = likeCountData.likeCount || 0;
+                likeCountSpan.innerHTML = clickCount;
+            } else {
+                console.error('Failed to fetch like count from the server.');
+            }
 
-              // Update the like count in the span element
-              likeCountSpan.innerHTML = clickCount;
+            // Add a click event listener to the like button
+            likeButton.addEventListener('click', async () => {
+                // Get the username from the data attribute
+                const username = likeButton.getAttribute('data-username');
 
-              // Send a request to the server to update the like count
-              const likeResponse = await fetch('/updateLikeCount', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                      username: username,
-                      updatedLikeCount: clickCount,
-                  }),
-              });
+                // Increment the click count for the specific username
+                const currentClickCount = parseInt(likeCountSpan.innerHTML);
+                likeCountSpan.innerHTML = currentClickCount + 1;
 
-              if (!likeResponse.ok) {
-                  console.error('Failed to update like count on the server.');
-                  // You might want to handle this error appropriately
-              }
-          });
+                // Send a request to the server to update the like count
+                const likeResponse = await fetch('/updateLikeCount', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        updatedLikeCount2: currentClickCount + 1,
+                    }),
+                });
 
-          // Append elements to the row
-          leaderboardNumber.appendChild(leaderboardText);
-          leaderboardNumber.appendChild(likeButton);
+                if (!likeResponse.ok) {
+                    console.error('Failed to update like count on the server.');
+                    // You might want to handle this error appropriately
+                }
+            });
 
-          // Append the row to the leaderboard container
-          leaderboardContainer.appendChild(row);
-      }
-  } catch (error) {
-      console.error('Error fetching and updating leaderboard:', error);
-  }
+            // Append elements to the row
+            leaderboardNumber.appendChild(leaderboardText);
+            leaderboardNumber.appendChild(likeButton);
+
+            // Append the row to the leaderboard container
+            leaderboardContainer.appendChild(row);
+        }
+    } catch (error) {
+        console.error('Error fetching and updating leaderboard:', error);
+    }
 }
 
 
