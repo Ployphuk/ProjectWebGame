@@ -23,10 +23,43 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+async function logout() {
+    try {
+        // Add a confirmation dialog
+        const confirmLogout = confirm("Are you sure you want to logout?");
+        if (!confirmLogout) {
+            return; // Do nothing if the user cancels the logout
+        }
+
+        // Make an asynchronous request to the server to log the user out
+        const response = await fetch('/logout', { method: 'GET' });
+
+        if (response.ok) {
+            // Redirect the user to the login page or any other desired page
+            window.location.href = 'Index.html';
+        } else {
+            console.error('Logout failed');
+        }
+    } catch (error) {
+        console.error('Error during logout:', error);
+    }
+}
 
 
 function pageLoad() {
     // Add functionality for the window load event
+
+    // Add event listener for the logout button
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            logout();
+        });
+    } else {
+        console.error("Element with ID 'logoutBtn' not found");
+    }
 }
 
 // Ensure the DOM is fully loaded before executing the script
