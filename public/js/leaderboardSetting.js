@@ -25,7 +25,7 @@ function getCookie(name) {
 }
 
 
-let clickCount;
+let clickCount =0;
 
 // Function to fetch and update leaderboard data
 async function fetchLeaderboard() {
@@ -84,7 +84,7 @@ async function fetchLeaderboard() {
 
           if (likeCountResponse.ok) {
               const likeCountData = await likeCountResponse.json();
-              clickCount = likeCountData.likeCount;
+              clickCount = likeCountData.likeCount || 0;
               likeCountSpan.innerHTML = clickCount;
           } else {
               console.error('Failed to fetch like count from the server.');

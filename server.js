@@ -253,7 +253,7 @@ app.post('/submitComment2', authenticateUser, async (req, res) => {
             // Update the existing comment if needed
             // For example, you might want to update the timestamp or modify the existing commentText
             const updateCommentQuery = `
-                UPDATE comment SET commentText = '${commentText}' WHERE username = '${username}'
+                UPDATE comment2 SET commentText = '${commentText}' WHERE username = '${username}'
             `;
             await queryDB(updateCommentQuery);
         } else {
@@ -311,6 +311,10 @@ app.post('/like', authenticateUser, async (req, res) => {
 app.post('/updateLikeCount', authenticateUser, async (req, res) => {
     try {
         const { username, updatedLikeCount } = req.body;
+
+        if (isNaN(updatedLikeCount)) {
+            throw new Error('Invalid like count provided.');
+        }
 
         // Update the like count in the database
         const updateLikeCountQuery = `UPDATE ${tablename} SET likeCount2 = ${updatedLikeCount} WHERE username = '${username}'`;
