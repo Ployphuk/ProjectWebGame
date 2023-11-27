@@ -9,38 +9,45 @@
 </head>
 
 <body>
-    
+
     <div class="grid-container">
         <div id="header">
-            <h2>Untitled</h2>
-            <h3><span id="usernameDisplay"></span></h3>
+            <i class='bx bxs-ghost'></i>
+            <h2 id="webName">Untitled</h2>
+            <div id="menu">
+                <a id="home" href="./GamePage.html">Home</a>
+                <a id="leaderboard1" href="./LeaderBoard1.html">Fall Game LeaderBoard</a>
+                <a id="leaderboard3" href="./LeaderBoard3.html">Chrome Dino LeaderBoard</a>
+            </div>
+            <h2><span id="usernameDisplay"></span></h2>
         </div>
-        
+
         <div id="main2">
             <div class="flex_container">
                 <div>
-
-                        <div><img src="picture/fall_game.png" class="pic"></div>
-                    
-                    <a href="fall-game-master/index.html" ><button>Ball Falling game</button></a>
-                    <a href="LeaderBoard1.html"><button>Leaderboard</button> </a>
+                    <a href="fall-game-master/index.html"><img src="picture/fall_game.png" class="pic">></a><br>
+                    <p id="gamename">Ball Falling game</p>
+                    <a href="LeaderBoard1.html" id="leaderboard_color">LeaderBoard </a>
                 </div>
+                <!-- <div>
+                <div><img src="picture/pacman.png" class="pic"></div>
+                <a href="pacman-js-master/pacman.html"><button>Pacman Game</button></a>
+            </div> -->
                 <div>
-                    <div><img src="picture/pacman.png" class="pic"></div>
-                    <a href="pacman-js-master/pacman.html"><button>Pacman Game</button></a>
-                </div>
-                <div>
-                    <div><img src="picture/Dino.png" class="pic2"></div>
-                    <a href="chrome-dinosaur-game-master/index.html"><button>Dino Game</button></a>
-                </div>
 
-                
-                    <button type="submit" id="logoutBtn">Logout</button>
-                
+                    <a href="chrome-dinosaur-game-master/index.html"><img src="picture/Dino.png" class="pic2"></a><br>
+                    <p>Dinosaur Game</p>
+                    <a href="LeaderBoard3.html" id="leaderboard_color">LeaderBoard </a>
+                </div>
+                <button type="submit" id="logoutBtn">Logout</button>
+
             </div>
         </div>
-        <div class="footer">
-            
+        <div id="footer">
+            <p id="contact">Contact : Chaitae Group @ KMUTT</p>
+            <p id="copyright">CopyRight2023</p>
+        </div>
+
 
         </div>
     </div>
