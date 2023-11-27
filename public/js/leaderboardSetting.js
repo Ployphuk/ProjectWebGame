@@ -25,7 +25,7 @@ function getCookie(name) {
 }
 
 
-
+let clickCount;
 
 // Function to fetch and update leaderboard data
 async function fetchLeaderboard() {
@@ -72,7 +72,7 @@ async function fetchLeaderboard() {
           likeButton.appendChild(likeCountSpan);
 
           // Fetch the current like count from the server
-          const likeCountResponse = await fetch('/getLikeCount', {
+          const likeCountResponse = await fetch('/updateLikeCount', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ async function fetchLeaderboard() {
               likeCountSpan.innerHTML = clickCount;
 
               // Send a request to the server to update the like count
-              const likeResponse = await fetch('/likeScore', {
+              const likeResponse = await fetch('/updateLikeCount', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ async function postComment() {
       }
 
       // Send the comment to the server
-      const response = await fetch('/submitComment', {
+      const response = await fetch('/submitComment2', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ async function postComment() {
 // Add a function to fetch and update comments
 async function fetchComments() {
   try {
-      const response = await fetch('/getComments');
+      const response = await fetch('/getComments2');
       const commentsData = await response.json();
 
       const feedContainer = document.getElementById('feed-container');
