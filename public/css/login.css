@@ -1,0 +1,44 @@
+body, html
+{
+    background-attachment: fixed;
+    background-color:#fff0d3;
+    background-image: linear-gradient(#fff0d3, white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    font-family: "Outfit", Quicksand;
+}
+
+h2
+{
+    color: #003049;
+    text-align: center;
+}
+
+#main
+{
+    width: 420px;
+    color: #003049;
+    background-color: white;
+    border-radius: 20px;
+}
+
+#main h1
+{
+    font-size: 40px;
+    text-align: center;
+}
+
+#main .input-box
+{
+    width: 100%;
+    height: 50px;
+    margin: 30px;
+}
+
+.input-box #username
+{
+    width: 100%;
+    height: 100%;
+}
