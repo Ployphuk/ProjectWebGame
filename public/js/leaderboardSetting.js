@@ -7,7 +7,14 @@ function checkCookie() {
       console.log("Redirecting to login.html");
       window.location = "login.html";
   } else {
-      
+    console.log("Username found:", username);
+    // Update the DOM with the username
+    const usernameDisplay = document.getElementById("usernameDisplay");
+    if (usernameDisplay) {
+        usernameDisplay.innerText = "Welcome, " + username;
+    } else {
+        console.error("Element with ID 'usernameDisplay' not found");
+    }
   }
 }
 
@@ -54,7 +61,8 @@ async function fetchLeaderboard() {
           const fallgamescore = entry.fallgamescore || 'N/A';
 
           // Set the text content for the leaderboard entry
-          leaderboardText.innerHTML = `${username}  Score: ${fallgamescore}`;
+          leaderboardText.innerHTML = `${username}  Score: ${fallgamescore !== 'N/A' ? fallgamescore : '0'}`;
+
 
           // Create a like button
           const likeButton = document.createElement('button');
