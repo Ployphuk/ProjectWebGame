@@ -220,6 +220,74 @@ app.post('/submitComment', authenticateUser, async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
+=======
+app.get('/getComments', async (req, res) => {
+    try {
+        
+        // Retrieve comments from the database, ordered by timestamp in descending order
+        //test
+        const getCommentsQuery = 'SELECT * FROM comment ORDER BY timestamp DESC LIMIT 10';
+        const commentsData = await queryDB(getCommentsQuery);
+
+
+        res.json(commentsData);
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+//part2
+app.post('/submitComment2', authenticateUser, async (req, res) => {
+    try {
+        const { commentText } = req.body;
+        const username = req.username;
+
+        // Check if the user already has a comment
+        const existingCommentQuery = `SELECT * FROM comment2 WHERE username = '${username}'`;
+        const existingComment = await queryDB(existingCommentQuery);
+
+        if (existingComment.length > 0) {
+            // Update the existing comment if needed
+            // For example, you might want to update the timestamp or modify the existing commentText
+            const updateCommentQuery = `
+                UPDATE comment2 SET commentText = '${commentText}' WHERE username = '${username}'
+            `;
+            await queryDB(updateCommentQuery);
+        } else {
+            // Insert the new comment into the comments table
+            const insertCommentQuery = `
+                INSERT INTO comment2 (username, commentText,timestamp)
+                VALUES ('${username}', '${commentText}', CURRENT_TIMESTAMP)
+            `;
+            await queryDB(insertCommentQuery);
+        }
+
+        res.json({ message: 'Comment submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting comment:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/getComments2', async (req, res) => {
+    try {
+        
+        // Retrieve comments from the database, ordered by timestamp in descending order
+        //test
+        const getCommentsQuery = 'SELECT * FROM comment2 ORDER BY timestamp DESC LIMIT 10';
+        const commentsData = await queryDB(getCommentsQuery);
+
+
+        res.json(commentsData);
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+>>>>>>> under2
 
 //likebutton
 // Add this route to your server.js file
@@ -242,11 +310,23 @@ app.post('/like', authenticateUser, async (req, res) => {
 // Add this route to your server.js file
 app.post('/getLikeCount', authenticateUser, async (req, res) => {
     try {
+<<<<<<< HEAD
         const { username } = req.body;
 
         // Fetch the current like count from the database
         const getLikeCountQuery = `SELECT likeCount2 FROM ${tablename} WHERE username = '${username}'`;
         const likeCountData = await queryDB(getLikeCountQuery);
+=======
+        const { username, updatedLikeCount2 } = req.body;
+
+        if (isNaN(updatedLikeCount2)) {
+            throw new Error('Invalid like count provided.');
+        }
+
+        // Update the like count in the database
+        const updateLikeCountQuery = `UPDATE ${tablename} SET likeCount2 = ${updatedLikeCount2} WHERE username = '${username}'`;
+        await queryDB(updateLikeCountQuery);
+>>>>>>> under2
 
         if (likeCountData.length > 0) {
             const currentLikeCount = likeCountData[0].likeCount2;
@@ -261,8 +341,30 @@ app.post('/getLikeCount', authenticateUser, async (req, res) => {
     }
 });
 
+// Add this route to your server.js file
+app.post('/getLikeCount', authenticateUser, async (req, res) => {
+    try {
+        const { username } = req.body;
 
+        // Fetch the like count from the database
+        const getLikeCountQuery = `SELECT likeCount2 FROM ${tablename} WHERE username = '${username}'`;
+        const result = await queryDB(getLikeCountQuery);
 
+<<<<<<< HEAD
+=======
+        if (result.length > 0) {
+            const likeCount = result[0].likeCount2;
+            res.json({ likeCount });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error fetching like count:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+>>>>>>> under2
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
