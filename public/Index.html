@@ -6,35 +6,40 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<title>Login</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
-	<link rel='stylesheet' type='text/css' media='screen' href='login.css'>
+	<link rel='stylesheet' type='text/css' media='screen' href='css/login.css'>
 	<script type="text/javascript" src="/public/js/loginctl.js"></script>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:
+	wght@300;400;500;600;700&family=Lora:wght@400;500&family=Outfit:
+	wght@200;300;400;500;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	
 </head>
 
 <body>
-	<div>
-		<form name="loginForm" id="loginForm" action="/login" method="post">
+	<form name="loginForm" id="loginForm" action="/login" method="post">
 
-			<div class="grid-container">
-				<div id="header">
-					<h2>Untitled</h2>
-				</div>
+		<div id="header">
+			<i class='bx bxs-ghost'></i><h2>Untitled</h2>
+		</div>
 
-				<div id="main">
-					<div>Login</div>
-					<div class="input-box">
-						<input type="text" id="username" name="username" placeholder="Username" required>
-					</div>
-					<div>
-						<input type="password" id="password" name="password" placeholder="Password" required>
-					</div>
-					<button type="submit" id="loginBtn">Login</button>
-                    <p>Don't have an account? <a id = "register" href = "./register.html">Register now!</a></p>
+		<div id="main">
+			<div id="inside">
+				<h1>Login</h1>
+				<div class="input-box">
+					<input type="text" id="username" name="username" placeholder="Username" required>
+					<i class='bx bxs-user'></i>
 				</div>
+				<div class="input-box">
+					<input type="password" id="password" name="password" placeholder="Password" required>
+					<i class='bx bxs-lock-open-alt' ></i>
+				</div>
+				<button type="submit" id="loginBtn">Login</button>
+            	<p>Don't have an account? <a id = "register" href = "./register.html">Register now!</a></p>
 			</div>
+		</div>
 
-		</form>
-	</div>
+	</form>
+
 </body>
 
 </html>
