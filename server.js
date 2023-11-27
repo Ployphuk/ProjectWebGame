@@ -96,6 +96,22 @@ app.get("/gamepage", authenticateUser, (req, res) => {
 // ... (existing code)
 
 
+app.post('/submitScore', async (req, res) => {
+    try {
+        const { score, username } = req.body;
+
+        // Update the user's score in the database
+        const updateScoreQuery = `UPDATE userdata SET dinogamescore = ${score} WHERE username = '${username}'`;
+        await queryDB(updateScoreQuery);
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error submitting score:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 
 
 app.listen(port, () => {

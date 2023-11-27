@@ -1,9 +1,3 @@
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
 function checkCookie() {
     console.log("Checking cookie...");
     var username = getCookie("username");
@@ -22,6 +16,14 @@ function checkCookie() {
         }
     }
 }
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+
 
 function pageLoad() {
     // Add functionality for the window load event

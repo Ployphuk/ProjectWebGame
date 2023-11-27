@@ -73,10 +73,17 @@ window.onload = function() {
     document.addEventListener("keydown", moveDino);
 }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
-        window.location.href = "../leaderboard3.html?score=" + score;
+        sendScoreToServer(score);
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
@@ -100,6 +107,39 @@ function update() {
             }
         }
     }
+
+    // ... (existing code)
+
+function sendScoreToServer(score) {
+    // Retrieve the username from cookies
+    const username = getCookie("username");
+
+    if (!username) {
+        console.error("Username not found in cookies.");
+        return;
+    }
+
+    fetch('/submitScore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score, username }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Failed to submit score:', response.statusText);
+        }
+    })
+    .catch(error => console.error('Error submitting score:', error))
+    .finally(() => {
+        // Redirect to the leaderboard page
+        window.location.href = '../leaderboard3.html';
+    });
+}
+
+// ... (rest of the existing code)
+
 
     //score
     context.fillStyle="black";
