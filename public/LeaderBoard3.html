@@ -4,38 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Chrome Dino Leaderboard</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='./css/leaderboard.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/leaderboard.css'>
     <script type="text/javascript" src="./js/leaderboardSetting.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:
+	wght@300;400;500;600;700&family=Lora:wght@400;500&family=Outfit:
+	wght@200;300;400;500;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="grid-container">
 
         <div id="header">
-            <h2>Untitled</h2>
+            <i class='bx bxs-ghost'></i><h2 id="webName">Untitled</h2>
+            <div id="menu">
+                <a id="home" href="./GamePage.html">Home</a>
+                <a id="leaderboard1" href="./LeaderBoard1.html">Fall Game LeaderBoard</a>
+                <a id="leaderboard3" href="./LeaderBoard3.html">Chrome Dino LeaderBoard</a>
+            </div>
             <h2><span id="usernameDisplay"></span></h2>
-            <a id="home" href="./GamePage.html">Home</a>
-            <a id="leaderboard1" href="./LeaderBoard1.html">Fall Game LeaderBoard</a>
-            <a id="leaderboard2" href="./LeaderBoard2.html">Pacman LeaderBoard</a>
-            <a id="leaderboard3" href="./LeaderBoard3.html">Chrome Dino LeaderBoard</a>
-            <p id="playerName">Name</p><img src="" id="profilePic">
+        </div>
+
+        <div id="champions">
+            <i id="glitter1" class='bx bx-cross'></i><i id="crown" class='bx bxs-crown'></i><i id="glitter2" class='bx bx-cross'></i>
         </div>
 
         <div id="main">
-            <div class="rank" id="leaderboard">
-               
-            </div>
+            <div class="rank" id="leaderboard"></div>
         </div>
 
         <div class="Comment">
             <h3>Comment</h3>
             <div class="inputComment">
                 <div id="posting">
-                    <textarea name="msg" id="textmsg" value="" placeholder="" rows="4" cols="50"></textarea>
+                    <textarea name="msg" id="textmsg" value="" placeholder="Comment Something!" rows="4" cols="50"></textarea>
                     <br>
-                    <button id="postbutton" onclick="postComment()">Post</button>
+                    <button id="postbutton" onclick="postComment()"><i id="post" class='bx bxs-send'></i></button>
                 </div>
-                <hr>
                 <div id="feed-container">
 
                 </div>
@@ -43,7 +48,7 @@
         </div>
 
         <div id="footer">
-            <p id="contact">Contact</p>
+            <p id="contact">Contact : Chaitae Group @ KMUTT</p>
             <p id="copyright">CopyRight2023</p>
         </div>
     </div>

@@ -1,0 +1,203 @@
+body, html
+{
+    background-attachment: fixed;
+    background-color:#fff0d3;
+    background-image: linear-gradient(#fff0d3, white);
+    font-family: "Outfit", Quicksand;
+}
+
+#header
+{
+    display: inline-flex;
+    background-color: #f77f00;;
+    width: 100%;
+    height: 100px;
+}
+
+#usernameDisplay
+{
+    position: absolute; 
+    top: 35px;
+    right: 50px;
+    font-size: 30px;
+    color: white;
+}
+
+#header i
+{
+    font-size: 40px;
+    position: absolute; 
+    top: 35px;
+    left: 50px;
+    color: white;
+}
+
+#header #webName
+{
+    font-size: 30px;
+    margin-top: 27px;
+    margin-left: 100px;
+    color: white;
+}
+
+#header #menu
+{
+    margin: auto;
+    margin-left: 20%;
+}
+
+a
+{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin: 15px;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+#champions
+{
+    text-align: center;
+}
+
+#glitter1
+{
+    margin-top: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    color: #d62828;
+}
+
+#crown
+{
+    margin-top: 3%;
+    font-size: 50px;
+    color: #d62828;
+}
+
+#glitter2
+{
+    margin-top: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    color: #d62828;
+}
+
+
+#main
+{
+    margin-bottom: 5%;
+    text-align: center;
+    justify-content: center;
+}
+
+h1
+{
+    color: #003049;
+}
+
+button
+{
+    width: 8%;
+    padding: 0.8%;
+    margin-bottom: 3%;
+    border: 2px solid #fcbf49;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #003049;
+    background-color: #fcbf49;
+    cursor: pointer;
+}
+
+span
+{
+    font-weight: 500;
+    font-size: 16px;
+    font-family: "Outfit", Quicksand;
+}
+
+.Comment
+{
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+h3
+{
+    font-size: 24px;
+    color: #003049;
+    margin-bottom: 2%;
+}
+
+#textmsg
+{
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #003049;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: "Outfit", Quicksand;
+}
+
+#textmsg::placeholder
+{
+    font-family: "Outfit", Quicksand;
+}
+
+#postbutton
+{
+    width: 10%;
+    padding: 1%;
+    margin-top: 1.5%;
+    margin-bottom: 3%;
+    border: 2px solid #fcbf49;
+    border-radius: 40px;
+    font-weight: 500;
+    font-size: 25px;
+    color: #003049;
+    background-color: #fcbf49;
+    cursor: pointer;
+}
+
+#feed-container
+{
+    font-size: 20px;
+    color: #003049;
+}
+
+#footer
+{
+    display: inline-flex;
+    position: relative;
+    background-color: #f77f00;;
+    width: 100%;
+    height: 70px;
+    margin-top: 5%;
+}
+
+#contact
+{
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    font-size: 20px;
+    color: white;
+}
+
+#copyright
+{
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    /* margin-bottom: 2%;
+    margin-right: 2%; */
+    font-size: 20px;
+    color: white;
+}
