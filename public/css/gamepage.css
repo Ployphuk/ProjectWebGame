@@ -127,7 +127,7 @@ a:hover {
     flex-wrap: wrap;
 }
 
-.flex_container>div {
+/* .flex_container>div {
     border: 2px solid #fcbf49;
     border-radius: 20px;
     width: 700px;
@@ -136,33 +136,32 @@ a:hover {
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: #fff0d3;
-}
+} */
 
 .pic {
-    margin-top: 30px;
+    margin-top: 10%;
     width: 300px;
     height: 300px;
     border-radius: 10px;
-
+    border: 3px solid transparent;
 }
 
 .pic:hover {
-    width: 350px;
-    height: 350px;
+    border: 3px solid #d62828;
 
 }
 
 .pic2 {
-    margin-top: 30px;
+    margin-top: 15%;
     width: 600px;
     height: 300px;
     border-radius: 10px;
+    border: 3px solid transparent;
 }
 
 .pic2:hover {
 
-    width: 650px;
-    height: 350px;
+    border: 3px solid #d62828;
 
 }
 
@@ -185,12 +184,12 @@ a:hover {
     margin-top: 70px;
 }
 
-.leaderboard {
+/* .leaderboard {
     float: right;
     margin-right: 100px;
     font-size: 24px;
     margin-top: 70px;
-}
+} */
 
 .register {
     float: left;
@@ -207,11 +206,14 @@ a:hover {
 }
 
 #logoutBtn {
-    height: 30px;
+    height: 10%;
     width: 100px;
     border-radius: 30px;
+    border: 2px solid #d62828;
+    font-family: "Outfit", Quicksand;
     font-size: 20px;
-    margin-top: 10px;
+    margin-top: 20%;
+    padding: 1%;
     background-color: #d62828;
     color: azure;
     cursor: pointer;
@@ -219,11 +221,11 @@ a:hover {
 
 #logoutBtn:hover {
     background-color: #003049;
+    border: 2px solid #003049;
 }
 
 #leaderboard_color {
     color: #005481;
-    padding-top: 20px;
 }
 
 #leaderboard_color:hover {
@@ -232,5 +234,5 @@ a:hover {
 }
 
 #gamename {
-    padding-top: 0px;
+    margin: 1%;
 }
