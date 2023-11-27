@@ -77,6 +77,14 @@ app.post("/login", async (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    // Clear the username cookie or perform any other logout actions
+
+    res.clearCookie('username');
+    res.redirect('/index.html'); // Redirect to the login page after logout
+});
+
+
 const authenticateUser = (req, res, next) => {
     const username = req.cookies.username;
 
@@ -139,6 +147,7 @@ app.post('/fallgamescore', authenticateUser, async (req, res) => {
 
 //leaderboard
 // Add this route to your server.js file
+// Regular leaderboard route
 app.get('/leaderboard', async (req, res) => {
     try {
         const getLeaderboardQuery = 'SELECT username, dinogamescore FROM userdata ORDER BY dinogamescore DESC LIMIT 3';
@@ -150,13 +159,14 @@ app.get('/leaderboard', async (req, res) => {
     }
 });
 
+// Fallgame leaderboard route
 app.get('/fallleaderboard', async (req, res) => {
     try {
-        const getLeaderboardQuery = 'SELECT username, fallgamescore FROM userdata ORDER BY fallgamescore DESC LIMIT 3';
-        const leaderboardData = await queryDB(getLeaderboardQuery);
-        res.json(leaderboardData);
+        const getFallLeaderboardQuery = 'SELECT username, fallgamescore FROM userdata ORDER BY fallgamescore DESC LIMIT 3';
+        const fallLeaderboardData = await queryDB(getFallLeaderboardQuery);
+        res.json(fallLeaderboardData);
     } catch (error) {
-        console.error('Error fetching leaderboard data:', error);
+        console.error('Error fetching fallgame leaderboard data:', error);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -212,6 +222,71 @@ app.post('/submitComment', authenticateUser, async (req, res) => {
     }
 });
 
+app.get('/getComments', async (req, res) => {
+    try {
+        
+        // Retrieve comments from the database, ordered by timestamp in descending order
+        //test
+        const getCommentsQuery = 'SELECT * FROM comment ORDER BY timestamp DESC LIMIT 10';
+        const commentsData = await queryDB(getCommentsQuery);
+
+
+        res.json(commentsData);
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+//part2
+app.post('/submitComment2', authenticateUser, async (req, res) => {
+    try {
+        const { commentText } = req.body;
+        const username = req.username;
+
+        // Check if the user already has a comment
+        const existingCommentQuery = `SELECT * FROM comment2 WHERE username = '${username}'`;
+        const existingComment = await queryDB(existingCommentQuery);
+
+        if (existingComment.length > 0) {
+            // Update the existing comment if needed
+            // For example, you might want to update the timestamp or modify the existing commentText
+            const updateCommentQuery = `
+                UPDATE comment SET commentText = '${commentText}' WHERE username = '${username}'
+            `;
+            await queryDB(updateCommentQuery);
+        } else {
+            // Insert the new comment into the comments table
+            const insertCommentQuery = `
+                INSERT INTO comment2 (username, commentText,timestamp)
+                VALUES ('${username}', '${commentText}', CURRENT_TIMESTAMP)
+            `;
+            await queryDB(insertCommentQuery);
+        }
+
+        res.json({ message: 'Comment submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting comment:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/getComments2', async (req, res) => {
+    try {
+        
+        // Retrieve comments from the database, ordered by timestamp in descending order
+        //test
+        const getCommentsQuery = 'SELECT * FROM comment2 ORDER BY timestamp DESC LIMIT 10';
+        const commentsData = await queryDB(getCommentsQuery);
+
+
+        res.json(commentsData);
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 //likebutton
 // Add this route to your server.js file
@@ -232,26 +307,23 @@ app.post('/like', authenticateUser, async (req, res) => {
 
 
 // Add this route to your server.js file
-app.post('/getLikeCount', authenticateUser, async (req, res) => {
+// Change SELECT to UPDATE
+app.post('/updateLikeCount', authenticateUser, async (req, res) => {
     try {
-        const { username } = req.body;
+        const { username, updatedLikeCount } = req.body;
 
-        // Fetch the current like count from the database
-        const getLikeCountQuery = `SELECT likeCount2 FROM ${tablename} WHERE username = '${username}'`;
-        const likeCountData = await queryDB(getLikeCountQuery);
+        // Update the like count in the database
+        const updateLikeCountQuery = `UPDATE ${tablename} SET likeCount2 = ${updatedLikeCount} WHERE username = '${username}'`;
+        await queryDB(updateLikeCountQuery);
 
-        if (likeCountData.length > 0) {
-            const currentLikeCount = likeCountData[0].likeCount2;
-            res.json({ likeCount: currentLikeCount });
-        } else {
-            console.error('User not found or like count not available.');
-            res.status(404).json({ error: 'User not found or like count not available.' });
-        }
+        res.json({ message: 'Like count updated successfully' });
     } catch (error) {
-        console.error('Error fetching like count:', error);
+        console.error('Error updating like count:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
 
 
 
