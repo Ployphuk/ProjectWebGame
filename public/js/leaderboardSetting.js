@@ -1,11 +1,11 @@
-// Update your JavaScript file (leaderboardSetting.js)
+
 function checkCookie() {
   console.log("Checking cookie...");
   var username = getCookie("username");
   console.log("Username from cookie:", username);
   if (!username) {
       console.log("Redirecting to login.html");
-      window.location = "login.html";
+      window.location = "Index.html";
   } else {
     console.log("Username found:", username);
     // Update the DOM with the username
@@ -26,9 +26,7 @@ function getCookie(name) {
 
 
 
-// Function to fetch and update leaderboard data
-// Function to fetch and update leaderboard 
-//test
+
 // Function to fetch and update leaderboard data
 async function fetchLeaderboard() {
   try {
@@ -58,10 +56,10 @@ async function fetchLeaderboard() {
 
           // Get username and fallgamescore from the entry
           const username = entry.username || 'N/A';
-          const fallgamescore = entry.fallgamescore || 'N/A';
+          const dinogamescore = entry.dinogamescore || 'N/A';
 
           // Set the text content for the leaderboard entry
-          leaderboardText.innerHTML = `${username}  Score: ${fallgamescore !== 'N/A' ? fallgamescore : '0'}`;
+          leaderboardText.innerHTML = `${username}  Score: ${dinogamescore !== 'N/A' ? dinogamescore : '0'}`;
 
 
           // Create a like button
@@ -133,7 +131,7 @@ async function fetchLeaderboard() {
 
 
 
-//test
+
 // Add a function to post comments
 async function postComment() {
   try {
