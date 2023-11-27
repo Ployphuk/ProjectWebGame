@@ -196,6 +196,26 @@ app.post('/submitComment', authenticateUser, async (req, res) => {
     }
 });
 
+//likebutton
+// ... (existing code)
+
+// Add this route to your server.js file
+app.post('/like', authenticateUser, async (req, res) => {
+    try {
+        const { username, updatedLikeCount } = req.body;
+
+        // Update the like count in the database
+        const updateLikeCountQuery = `UPDATE ${tablename} SET likeCount = ${updatedLikeCount} WHERE username = '${username}'`;
+        await queryDB(updateLikeCountQuery);
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('Error updating like count:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// ... (existing code)
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
