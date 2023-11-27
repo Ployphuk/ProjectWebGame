@@ -1,7 +1,7 @@
 const fs = require("fs");
 const express = require('express');
 const bodyParser = require('body-parser');
-var cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const mysql = require('mysql');
 const hostname = 'localhost';
 const path = require("path");
@@ -65,7 +65,7 @@ app.post("/login", async (req, res) => {
 
     if (result.length > 0) {
         // Login successful
-        
+        res.cookie("username", username);
         return res.redirect("gamepage.html");
     } else {
         // Login failed
@@ -73,17 +73,29 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/gamepage", (req, res) => {
+const authenticateUser = (req, res, next) => {
     const username = req.cookies.username;
 
     if (!username) {
         // Redirect to login page if the username cookie is not set
-        return res.redirect("/login.html");
+        return res.redirect("index.html");
     }
 
-    // Proceed with rendering the game page
-    res.sendFile(path.join(__dirname, "public", "gamepage.html"));
+    // Attach the username to the request for future use in the route handler
+    req.username = username;
+
+    // Continue to the next middleware or route handler
+    next();
+};
+
+app.get("/gamepage", authenticateUser, (req, res) => {
+    // Access the authenticated username through req.username
+    res.sendFile(path.join(__dirname, "public", "Index.html"));
 });
+
+// ... (existing code)
+
+
 
 
 app.listen(port, () => {
