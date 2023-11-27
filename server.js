@@ -38,8 +38,10 @@ let tablename ="userdata";
 const queryDB = (sql) => {
     return new Promise ((resolve,reject) => {
         db.query(sql, (err,result, fields) =>{
-            if (err) reject(err);
-            else
+            if (err) {
+                console.error('Database query error',err);
+                reject(err);
+            }else
                 resolve(result)
         })
     })
@@ -110,6 +112,26 @@ app.post('/submitScore', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+
+
+app.post('/fallgamescore', authenticateUser, async (req, res) => {
+    try {
+        const { fallscore } = req.body;
+        const username = req.username;
+
+        // Update the user's fall game score in the database
+        const updateScoreQuery = `UPDATE ${tablename} SET fallgamescore = ${fallscore} WHERE username = '${username}'`;
+        await queryDB(updateScoreQuery);
+
+        res.json({ message: 'Fall score submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting fall score:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 
 
 // Add this route to your server.js file

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Fall Game Leaderboard</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='css/leaderboard.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/leaderboard.css'>
     <script type="text/javascript" src="leaderboardSetting.js"></script>
 </head>
 
@@ -13,79 +13,17 @@
 
         <div id="header">
             <h2>Untitled</h2>
-            <a id = "home" href = "./GamePage.html">Home</a>
-            <a id = "leaderboard1" href = "./LeaderBoard1.html">Fall Game LeaderBoard</a>
-            <a id = "leaderboard2" href = "./LeaderBoard2.html">Pacman LeaderBoard</a>
-            <a id = "leaderboard3" href = "./LeaderBoard3.html">Chrome Dino LeaderBoard</a>
+            <a id="home" href="./GamePage.html">Home</a>
+            <a id="leaderboard1" href="./LeaderBoard1.html">Fall Game LeaderBoard</a>
+            <a id="leaderboard2" href="./LeaderBoard2.html">Pacman LeaderBoard</a>
+            <a id="leaderboard3" href="./LeaderBoard3.html">Chrome Dino LeaderBoard</a>
             <p id="playerName">Name</p><img src="" id="profilePic">
         </div>
 
         <div id="main">
-            <div class="rank">
-                <div class="1st">
-                    <div class="rankPic-container">
-                        <img src="blankProfile.png" class="profilePic">
-                        <img src="1stRank.png" class="rankPic">
-                    </div>
-                    <div class="name">Player1</div>
-                    <div class="scoreText">Score </div><div class="score">000</div>
-                    <div class="likeText">Likes </div><div class="likes">000</div>
-                    <div class="dislikeText">Dislikes </div><div class="dislikes">000</div>
-                    <button type="submit" class="likeBtn"><img src="likeBtn.png" class="likeBtnPic"></button>
-                    <button type="submit" class="dislikeBtn"><img src="dislikeBtn.png" class="dislikeBtnPic"></button>
-                </div>
-                
-                <div class="row">
-                    <div class="rankPic-container">
-                        <img src="blankProfile.png" class="profilePic">
-                        <img src="2ndRank.png" class="rankPic">
-                    </div>
-                    <div class="name">Player2</div>
-                    <div class="scoreText">Score </div><div class="score">000</div>
-                    <div class="likeText">Likes </div><div class="likes">000</div>
-                    <div class="dislikeText">Dislikes </div><div class="dislikes">000</div>
-                    <button type="submit" class="likeBtn"><img src="likeBtn.png" class="likeBtnPic"></button>
-                    <button type="submit" class="dislikeBtn"><img src="dislikeBtn.png" class="dislikeBtnPic"></button>
-                </div>
-                
-                <div class="row">
-                    <div class="rankPic-container">
-                        <img src="blankProfile.png" class="profilePic">
-                        <img src="3rdRank.png" class="rankPic">
-                    </div>
-                    <div class="name">Player3</div>
-                    <div class="scoreText">Score </div><div class="score">000</div>
-                    <div class="likeText">Likes </div><div class="likes">000</div>
-                    <div class="dislikeText">Dislikes </div><div class="dislikes">000</div>
-                    <button type="submit" class="likeBtn"><img src="likeBtn.png" class="likeBtnPic"></button>
-                    <button type="submit" class="dislikeBtn"><img src="dislikeBtn.png" class="dislikeBtnPic"></button>
-                </div>
-                
-                <div class="row">
-                    <div class="rankPic-container">
-                        <img src="blankProfile.png" class="profilePic">
-                        <img src="Rank.png" class="rankPic">
-                    </div>
-                    <div class="name">Player4</div>
-                    <div class="scoreText">Score </div><div class="score">000</div>
-                    <div class="likeText">Likes </div><div class="likes">000</div>
-                    <div class="dislikeText">Dislikes </div><div class="dislikes">000</div>
-                    <button type="submit" class="likeBtn"><img src="likeBtn.png" class="likeBtnPic"></button>
-                    <button type="submit" class="dislikeBtn"><img src="dislikeBtn.png" class="dislikeBtnPic"></button>
-                </div>
-                
-                <div class="row">
-                    <div class="rankPic-container">
-                        <img src="blankProfile.png" class="profilePic">
-                        <img src="Rank.png" class="rankPic">
-                    </div>
-                    <div class="name">Player5</div>
-                    <div class="scoreText">Score </div><div class="score">000</div>
-                    <div class="likeText">Likes </div><div class="likes">000</div>
-                    <div class="dislikeText">Dislikes </div><div class="dislikes">000</div>
-                    <button type="submit" class="likeBtn"><img src="likeBtn.png" class="likeBtnPic"></button>
-                    <button type="submit" class="dislikeBtn"><img src="dislikeBtn.png" class="dislikeBtnPic"></button>
-                </div>
+            <div class="rank" id="leaderboard">
+                <!-- The leaderboard will be dynamically populated here -->
+                <!-- You can use JavaScript to populate this section -->
             </div>
         </div>
 
@@ -99,9 +37,9 @@
                 </div>
                 <hr>
                 <div id="feed-container">
-                    
+
                 </div>
-            </div>  
+            </div>
         </div>
 
         <div id="footer">
@@ -109,6 +47,13 @@
             <p id="copyright">CopyRight2023</p>
         </div>
     </div>
+
+    <!-- Your script to dynamically populate the leaderboard -->
+    <script type="text/javascript">
+        // Use JavaScript to fetch data and populate the leaderboard dynamically
+        // Example: Fetch data and update the #leaderboard element
+        // document.getElementById('leaderboard').innerHTML = '<div class="1st">...</div><div class="row">...</div>...';
+    </script>
 </body>
 
 </html>

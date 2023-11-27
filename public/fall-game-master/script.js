@@ -59,12 +59,39 @@ var blocks = setInterval(function(){
     var characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     var characterLeft = parseInt(window.getComputedStyle(character).getPropertyValue("left"));
     var drop = 0;
+    
     if(characterTop <= 0){
         var finalScore = counter - 9;
-        alert("Game over. Score: " + finalScore);
         clearInterval(blocks);
-        window.location.href = "../leaderboard1.html";
+        fetch('/fallgamescore', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fallscore: finalScore }), // Change 'score' to 'fallscore'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error submitting fall score');
+            }
         
+            // Check if the response is not JSON (e.g., "OK" for success)
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.indexOf('application/json') !== -1) {
+                return response.json();
+            } else {
+                // Handle non-JSON response (e.g., "OK")
+                return { message: 'Success' }; // Customize based on your server's response
+            }
+        })
+        .then(data => {
+            console.log('Fall score submitted successfully');
+            // Redirect to the leaderboard page
+            window.location.href = '../leaderboard1.html';
+        })
+        .catch(error => {
+            console.error('Error submitting fall score:', error);
+        });
     
     }
     for(var i = 0; i < currentBlocks.length;i++){
