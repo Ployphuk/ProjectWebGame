@@ -98,12 +98,25 @@ let restartPacmanAndGhosts = () => {
     createGhosts();
 };
 
-let onGhostCollision = () => {
+let onGhostCollision = async () => {
     lives--;
     restartPacmanAndGhosts();
-    if (lives == 0) {
+    if (lives === 0) {
+        try {
+            await sendPacmanScoreToServer(score);
+            console.log('Score submitted successfully');
+            // Redirect to the leaderboard page
+            window.location.href = '../leaderboard2.html';
+        } catch (error) {
+            console.error('Failed to submit score or other error:', error);
+        }
     }
 };
+
+
+
+
+
 
 let update = () => {
     pacman.moveProcess();
@@ -267,3 +280,32 @@ window.addEventListener("keydown", (event) => {
         }
     }, 1);
 });
+function sendPacmanScoreToServer(score) {
+    console.log('Sending score to server:', score);
+    // Retrieve the username from cookies
+    const username = getCookie("username");
+
+    if (!username) {
+        console.error("Username not found in cookies.");
+        return Promise.reject(new Error("Username not found in cookies."));
+    }
+
+    return fetch('/submitpacmanScore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ score, username }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error('Failed to submit score:', response.statusText);
+            throw new Error('Failed to submit score');
+        }
+        return response;
+    })
+    .catch(error => {
+        console.error('Error submitting score:', error);
+        throw error;
+    });
+}
