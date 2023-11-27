@@ -147,6 +147,7 @@ app.post('/fallgamescore', authenticateUser, async (req, res) => {
 
 //leaderboard
 // Add this route to your server.js file
+// Regular leaderboard route
 app.get('/leaderboard', async (req, res) => {
     try {
         const getLeaderboardQuery = 'SELECT username, dinogamescore FROM userdata ORDER BY dinogamescore DESC LIMIT 3';
@@ -158,13 +159,14 @@ app.get('/leaderboard', async (req, res) => {
     }
 });
 
+// Fallgame leaderboard route
 app.get('/fallleaderboard', async (req, res) => {
     try {
-        const getLeaderboardQuery = 'SELECT username, fallgamescore FROM userdata ORDER BY fallgamescore DESC LIMIT 3';
-        const leaderboardData = await queryDB(getLeaderboardQuery);
-        res.json(leaderboardData);
+        const getFallLeaderboardQuery = 'SELECT username, fallgamescore FROM userdata ORDER BY fallgamescore DESC LIMIT 3';
+        const fallLeaderboardData = await queryDB(getFallLeaderboardQuery);
+        res.json(fallLeaderboardData);
     } catch (error) {
-        console.error('Error fetching leaderboard data:', error);
+        console.error('Error fetching fallgame leaderboard data:', error);
         res.status(500).send('Internal Server Error');
     }
 });
@@ -220,8 +222,6 @@ app.post('/submitComment', authenticateUser, async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
 app.get('/getComments', async (req, res) => {
     try {
         
@@ -287,7 +287,6 @@ app.get('/getComments2', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
->>>>>>> under2
 
 //likebutton
 // Add this route to your server.js file
@@ -308,15 +307,9 @@ app.post('/like', authenticateUser, async (req, res) => {
 
 
 // Add this route to your server.js file
-app.post('/getLikeCount', authenticateUser, async (req, res) => {
+// Change SELECT to UPDATE
+app.post('/updateLikeCount', authenticateUser, async (req, res) => {
     try {
-<<<<<<< HEAD
-        const { username } = req.body;
-
-        // Fetch the current like count from the database
-        const getLikeCountQuery = `SELECT likeCount2 FROM ${tablename} WHERE username = '${username}'`;
-        const likeCountData = await queryDB(getLikeCountQuery);
-=======
         const { username, updatedLikeCount2 } = req.body;
 
         if (isNaN(updatedLikeCount2)) {
@@ -326,17 +319,10 @@ app.post('/getLikeCount', authenticateUser, async (req, res) => {
         // Update the like count in the database
         const updateLikeCountQuery = `UPDATE ${tablename} SET likeCount2 = ${updatedLikeCount2} WHERE username = '${username}'`;
         await queryDB(updateLikeCountQuery);
->>>>>>> under2
 
-        if (likeCountData.length > 0) {
-            const currentLikeCount = likeCountData[0].likeCount2;
-            res.json({ likeCount: currentLikeCount });
-        } else {
-            console.error('User not found or like count not available.');
-            res.status(404).json({ error: 'User not found or like count not available.' });
-        }
+        res.json({ message: 'Like count updated successfully' });
     } catch (error) {
-        console.error('Error fetching like count:', error);
+        console.error('Error updating like count:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -350,8 +336,6 @@ app.post('/getLikeCount', authenticateUser, async (req, res) => {
         const getLikeCountQuery = `SELECT likeCount2 FROM ${tablename} WHERE username = '${username}'`;
         const result = await queryDB(getLikeCountQuery);
 
-<<<<<<< HEAD
-=======
         if (result.length > 0) {
             const likeCount = result[0].likeCount2;
             res.json({ likeCount });
@@ -364,7 +348,6 @@ app.post('/getLikeCount', authenticateUser, async (req, res) => {
     }
 });
 
->>>>>>> under2
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
