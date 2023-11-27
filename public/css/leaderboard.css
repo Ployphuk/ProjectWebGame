@@ -64,12 +64,29 @@ a:hover
     text-align: center;
 }
 
+#glitter1
+{
+    margin-top: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    color: #d62828;
+}
+
 #crown
 {
     margin-top: 3%;
     font-size: 50px;
     color: #d62828;
 }
+
+#glitter2
+{
+    margin-top: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    color: #d62828;
+}
+
 
 #main
 {
@@ -152,6 +169,7 @@ h3
 #feed-container
 {
     font-size: 20px;
+    color: #003049;
 }
 
 #footer
