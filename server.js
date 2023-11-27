@@ -166,12 +166,32 @@ app.get('/fallleaderboard', async (req, res) => {
 app.get('/getComments', async (req, res) => {
     try {
         // Retrieve comments from the database
-        const getCommentsQuery = 'SELECT * FROM comments ORDER BY timestamp DESC LIMIT 10';
+        const getCommentsQuery = 'SELECT * FROM comment ORDER BY timestamp DESC LIMIT 10';
         const commentsData = await queryDB(getCommentsQuery);
 
         res.json(commentsData);
     } catch (error) {
         console.error('Error fetching comments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Add this route to your server.js file
+app.post('/submitComment', authenticateUser, async (req, res) => {
+    try {
+        const { commentText } = req.body;
+        const username = req.username;
+
+        // Insert the new comment into the comments table
+        const insertCommentQuery = `
+            INSERT INTO comment (username, commentText)
+            VALUES ('${username}', '${commentText}')
+        `;
+        await queryDB(insertCommentQuery);
+
+        res.json({ message: 'Comment submitted successfully' });
+    } catch (error) {
+        console.error('Error submitting comment:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
