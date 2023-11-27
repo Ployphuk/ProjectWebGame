@@ -215,6 +215,29 @@ app.post('/like', authenticateUser, async (req, res) => {
     }
 });
 
+
+// Add this route to your server.js file
+app.post('/getLikeCount', authenticateUser, async (req, res) => {
+    try {
+        const { username } = req.body;
+
+        // Fetch the current like count from the database
+        const getLikeCountQuery = `SELECT likeCount2 FROM ${tablename} WHERE username = '${username}'`;
+        const likeCountData = await queryDB(getLikeCountQuery);
+
+        if (likeCountData.length > 0) {
+            const currentLikeCount = likeCountData[0].likeCount2;
+            res.json({ likeCount: currentLikeCount });
+        } else {
+            console.error('User not found or like count not available.');
+            res.status(404).json({ error: 'User not found or like count not available.' });
+        }
+    } catch (error) {
+        console.error('Error fetching like count:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // ... (existing code)
 
 app.listen(port, () => {
