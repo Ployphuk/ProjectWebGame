@@ -27,7 +27,7 @@ function getCookie(name) {
 
  
 
-// Update your JavaScript file (leaderboardSetting.js)
+
 // Function to fetch and update leaderboard data
 async function fetchfallLeaderboard() {
     try {

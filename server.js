@@ -97,7 +97,7 @@ app.get("/gamepage", authenticateUser, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "Index.html"));
 });
 
-// ... (existing code)
+
 
 
 //save score data
@@ -165,7 +165,7 @@ app.get('/fallleaderboard', async (req, res) => {
 //commentpart
 app.get('/getComments', async (req, res) => {
     try {
-        // Retrieve comments from the database
+        
         // Retrieve comments from the database, ordered by timestamp in descending order
         //test
         const getCommentsQuery = 'SELECT * FROM comment ORDER BY timestamp DESC LIMIT 10';
@@ -179,7 +179,6 @@ app.get('/getComments', async (req, res) => {
     }
 });
 
-//test
 // Add this route to your server.js file
 app.post('/submitComment', authenticateUser, async (req, res) => {
     try {
@@ -215,8 +214,6 @@ app.post('/submitComment', authenticateUser, async (req, res) => {
 
 
 //likebutton
-// ... (existing code)
-
 // Add this route to your server.js file
 app.post('/like', authenticateUser, async (req, res) => {
     try {
@@ -256,7 +253,7 @@ app.post('/getLikeCount', authenticateUser, async (req, res) => {
     }
 });
 
-// ... (existing code)
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
